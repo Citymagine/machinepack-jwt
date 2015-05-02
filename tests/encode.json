@@ -1,0 +1,10 @@
+{
+  "machine": "encode",
+  "expectations": [
+    {
+      "todo": true,
+      "using": {},
+      "outcome": "success"
+    }
+  ]
+}

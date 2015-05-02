@@ -47,9 +47,9 @@ module.exports = {
     var jwt = require('jwt-simple');
     var a = "HS256";
     if(inputs.algorithm){
-      a = inputs.algorithm
+      return exits.success(jwt.encode(inputs.payload, inputs.secret, inputs.algorithm));
     }
-    return exits.success(jwt.encode(inputs.payload, inputs.secret, a));
+    return exits.success(jwt.encode(inputs.payload, inputs.secret));
   },
 
 

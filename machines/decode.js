@@ -46,8 +46,8 @@ module.exports = {
 
   fn: function (inputs,exits) {
     var jwt = require('jwt-simple');
-    if(){
-
+    if(inputs.algorithm){
+      return exits.success(jwt.decode(inputs.token, inputs.secret, inputs.algorithm));
     }
     return exits.success(jwt.decode(inputs.token, inputs.secret));
   },

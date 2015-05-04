@@ -17,7 +17,7 @@ module.exports = {
       required: true
     },
     payload: {
-      example: {username:'ExampleUser', email:'example@email.com'},
+      example: '*',
       description: 'The contents of the JWT.',
       required: true
     },

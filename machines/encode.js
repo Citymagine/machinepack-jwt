@@ -12,12 +12,14 @@ module.exports = {
 
   inputs: {
     secret: {
+      friendlyName:'Secret',
       example: 'abc123jdhs3h4js',
       description: 'The secret used to encode the JWT.',
       required: true
     },
     payload: {
-      example: '*',
+      friendlyName:'JWT Payload',
+      typeclass: '*',
       description: 'The contents of the JWT.',
       required: true
     },

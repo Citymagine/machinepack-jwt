@@ -25,6 +25,7 @@ module.exports = {
     },
     algorithm:{
       example:'HS256',
+      defaultsTo:false,
       description:'The type of algorithm that is used to encode the JWT. Options: HS256, HS384, HS512 and RS256.'
     }
   },
@@ -39,7 +40,9 @@ module.exports = {
     },
 
     success: {
-      description: 'JWT encoded successfully.',
+      "description": 'JWT encoded successfully.',
+      "example":'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ',
+      "hasDynamicOutputType":true
     },
 
   },
@@ -47,7 +50,6 @@ module.exports = {
 
   fn: function (inputs,exits) {
     var jwt = require('jwt-simple');
-    var a = "HS256";
     if(inputs.algorithm){
       return exits.success(jwt.encode(inputs.payload, inputs.secret, inputs.algorithm));
     }

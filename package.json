@@ -1,6 +1,6 @@
 {
   "name": "machinepack-jwt",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Work with JSON Web Tokens.",
   "scripts": {
     "test": "node ./node_modules/test-machinepack-mocha/bin/testmachinepack-mocha.js"
@@ -13,7 +13,7 @@
   "author": "Prescott Prue (https://github.com/prescottprue)",
   "license": "MIT",
   "dependencies": {
-    "jwt-simple": "^0.3.0",
+    "jsonwebtoken": "^5.0.0",
     "machine": "^3.0.0"
   },
   "repository": {
@@ -31,7 +31,7 @@
       "decode"
     ],
     "devLinks": [
-      "https://www.npmjs.com/package/jwt-simple"
+      "https://www.npmjs.com/package/jsonwebtoken"
     ],
     "testsUrl": "https://travis-ci.org/prescottprue/machinepack-jwt"
   }

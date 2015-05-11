@@ -50,13 +50,17 @@ module.exports = {
 
 
   fn: function (inputs,exits) {
-    var jwt = require('jwt-simple');
-    if(inputs.algorithm){
-      return exits.success(jwt.decode(inputs.token, inputs.secret, inputs.algorithm));
+    var jwt = require('jsonwebtoken');
+    if(inputs.algorithm){ //Options exist
+      var options = {};
+      if(inputs.algorithm){
+        options.algorithms = [inputs.algorithm];
+      }
+      return exits.success(jwt.verify(inputs.token, inputs.secret, options));
     }
-    return exits.success(jwt.decode(inputs.token, inputs.secret));
+    else {
+      return exits.success(jwt.verify(inputs.token, inputs.secret));
+    }
   },
-
-
 
 };

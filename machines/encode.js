@@ -25,8 +25,11 @@ module.exports = {
     },
     algorithm:{
       example:'HS256',
-      defaultsTo:false,
       description:'The type of algorithm that is used to encode the JWT. Options: HS256, HS384, HS512 and RS256.'
+    },
+    expires:{
+      example:43200,
+      description:'Number of minutes until the token expires.'
     }
   },
 
@@ -43,17 +46,26 @@ module.exports = {
       "description": 'JWT encoded successfully.',
       "example":'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ',
       "hasDynamicOutputType":true
-    },
+    }
 
   },
 
 
   fn: function (inputs,exits) {
-    var jwt = require('jwt-simple');
-    if(inputs.algorithm){
-      return exits.success(jwt.encode(inputs.payload, inputs.secret, inputs.algorithm));
+    var jwt = require('jsonwebtoken');
+    if(inputs.expires || inputs.algorithm){ //Options exist
+      var options = {};
+      if(inputs.algorithm){
+        options.algorithm = inputs.algorithm;
+      }
+      if(inputs.expires){
+        options.expires = inputs.expires;
+      }
+      return exits.success(jwt.sign(inputs.payload, inputs.secret, options));
     }
-    return exits.success(jwt.encode(inputs.payload, inputs.secret));
+    else {
+      return exits.success(jwt.sign(inputs.payload, inputs.secret));
+    }
   },
 
 

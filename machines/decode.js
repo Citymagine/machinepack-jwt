@@ -39,10 +39,6 @@ module.exports = {
 
     success: {
       description: 'JWT decoded successfully.',
-      example:{
-        email:"test@test.com", 
-        name:"test"
-      },
       hasDynamicOutputType:true
     },
 

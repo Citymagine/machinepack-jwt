@@ -39,6 +39,10 @@ module.exports = {
 
     success: {
       description: 'JWT decoded successfully.',
+      getExample:function(inputs){
+        var t = getToken(inputs);
+        return Object.keys(t);
+      },
       hasDynamicOutputType:true
     },
 
@@ -46,17 +50,22 @@ module.exports = {
 
 
   fn: function (inputs,exits) {
-    var jwt = require('jsonwebtoken');
-    if(inputs.algorithm){ //Options exist
-      var options = {};
-      if(inputs.algorithm){
-        options.algorithms = [inputs.algorithm];
-      }
-      return exits.success(jwt.verify(inputs.token, inputs.secret, options));
-    }
-    else {
-      return exits.success(jwt.verify(inputs.token, inputs.secret));
-    }
+    return exits.success(getToken(inputs));
   },
 
 };
+function getToken(inputs){
+  var jwt = require('jsonwebtoken');
+  if(inputs.algorithm){ //Options exist
+    //TODO: Check that algorithm matches possibilities
+    var options = {};
+    if(inputs.algorithm){
+      options.algorithms = [inputs.algorithm];
+    }
+    return jwt.verify(inputs.token, inputs.secret, options);
+  }
+  else {
+    var d = jwt.verify(inputs.token, inputs.secret);
+    return d;
+  }
+}

@@ -22,9 +22,9 @@ module.exports = {
       required: true
     },
     schema:{
-      friendlyName: 'Token Schema'
+      description:'Expected parts of the token to make available in output.',
       example:'*',
-      description:'Expected parts of the token to make available in output.'
+      defaultsTo:'*'
     },
     algorithm:{
       example:'HS256',
@@ -47,7 +47,8 @@ module.exports = {
       description: 'JWT decoded successfully.',
       getExample:function(inputs){
         return inputs.schema;
-      }
+      },
+      hasDynamicOutputType:true
     }
 
   },

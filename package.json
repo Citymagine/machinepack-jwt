@@ -1,6 +1,6 @@
 {
   "name": "machinepack-jwt",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Work with JSON Web Tokens.",
   "scripts": {
     "test": "node ./node_modules/test-machinepack-mocha/bin/testmachinepack-mocha.js"

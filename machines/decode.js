@@ -21,6 +21,11 @@ module.exports = {
       description: 'JSON web token to decode.',
       required: true
     },
+    schema:{
+      friendlyName: 'Token Schema'
+      example:'*',
+      description:'Expected parts of the token to make available in output.'
+    },
     algorithm:{
       example:'HS256',
       description:'The type of algorithm that is used to decode the JWT. Options: HS256, HS384, HS512 and RS256. Make sure to use the same algorithm that you used to encode the JWT.'
@@ -38,22 +43,22 @@ module.exports = {
     },
 
     success: {
+      friendlyName:'then',
       description: 'JWT decoded successfully.',
       getExample:function(inputs){
-        var t = getToken(inputs);
-        return Object.keys(t);
-      },
-      hasDynamicOutputType:true
-    },
+        return inputs.schema;
+      }
+    }
 
   },
 
 
   fn: function (inputs,exits) {
     return exits.success(getToken(inputs));
-  },
+  }
 
 };
+
 function getToken(inputs){
   var jwt = require('jsonwebtoken');
   if(inputs.algorithm){ //Options exist

@@ -31,7 +31,7 @@ module.exports = {
       description:'Example of expected token object to make available in output. Can be example object or a list/array of parameter names.'
     },
     algorithm:{
-      friendlyName: 'Algorithm'
+      friendlyName: 'Algorithm',
       example:'HS256',
       description:'The type of algorithm that is used to decode the JWT. Options: HS256, HS384, HS512 and RS256. Make sure to use the same algorithm that you used to encode the JWT.'
     }

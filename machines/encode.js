@@ -24,10 +24,12 @@ module.exports = {
       required: true
     },
     algorithm:{
+      friendlyName:'Algorithm',
       example:'HS256',
       description:'The type of algorithm that is used to encode the JWT. Options: HS256, HS384, HS512 and RS256.'
     },
     expires:{
+      friendlyName:'Expires',
       example:43200,
       description:'Number of minutes until the token expires.'
     }

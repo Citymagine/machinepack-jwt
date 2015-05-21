@@ -14,20 +14,24 @@ module.exports = {
 
   inputs: {
     secret: {
+      friendlyName: 'Secret',
       example: 'abc123jdhs3h4js',
       description: 'Secret used to decode the JSON web token.',
       required: true
     },
     token: {
+      friendlyName: 'Token',
       example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ',
       description: 'JSON web token to decode.',
       required: true
     },
     schema:{
-      description:'Example of expected token object to make available in output. Can be example object or a list/array of parameter names.',
-      typeclass:'*'
+      friendlyName: 'Schema',
+      typeclass:'*',
+      description:'Example of expected token object to make available in output. Can be example object or a list/array of parameter names.'
     },
     algorithm:{
+      friendlyName: 'Algorithm'
       example:'HS256',
       description:'The type of algorithm that is used to decode the JWT. Options: HS256, HS384, HS512 and RS256. Make sure to use the same algorithm that you used to encode the JWT.'
     }

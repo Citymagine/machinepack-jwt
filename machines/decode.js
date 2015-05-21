@@ -1,3 +1,5 @@
+var _ = require('underscore');
+
 module.exports = {
 
 
@@ -22,9 +24,8 @@ module.exports = {
       required: true
     },
     schema:{
-      description:'Expected parts of the token to make available in output.',
-      example:'*',
-      defaultsTo:'*'
+      description:'Example of expected token object to make available in output. Can be example object or a list/array of parameter names.',
+      typeclass:'*'
     },
     algorithm:{
       example:'HS256',
@@ -45,22 +46,33 @@ module.exports = {
     success: {
       friendlyName:'then',
       description: 'JWT decoded successfully.',
-      getExample:function(inputs){
+      hasDynamicOutputType:true,
+      getExample:function (inputs){
+        // Example schema
+        var defaultObj = {id:"abc123", email:"example@example.com", role:"user", sessionId:"abc123"};
+        if(!inputs.schema) return defaultObj;
+        // Handle a array of parameters
+        if(_.isArray(inputs.schema)){
+          return arrayToExample(inputs.schema);
+        }
+        // Handle a list of parameters
+        if(_.isString(inputs.schema)){
+          var paramsArray = inputs.schema.split(",");
+          return arrayToExample(paramsArray);
+        }
+        // schema is an object
         return inputs.schema;
-      },
-      hasDynamicOutputType:true
+      }
     }
-
   },
 
-
-  fn: function (inputs,exits) {
-    return exits.success(getToken(inputs));
+  fn: function(inputs, exits){
+    return exitWithToken(inputs, exits);
   }
 
 };
 
-function getToken(inputs){
+function exitWithToken(inputs, exits){
   var jwt = require('jsonwebtoken');
   if(inputs.algorithm){ //Options exist
     //TODO: Check that algorithm matches possibilities
@@ -68,10 +80,29 @@ function getToken(inputs){
     if(inputs.algorithm){
       options.algorithms = [inputs.algorithm];
     }
-    return jwt.verify(inputs.token, inputs.secret, options);
+    try {
+      return exits.success(jwt.verify(inputs.token, inputs.secret, options));
+    } catch(err){
+      return exits.error(err);
+    }
   }
   else {
-    var d = jwt.verify(inputs.token, inputs.secret);
-    return d;
+    try {
+      return exits.success(jwt.verify(inputs.token, inputs.secret));
+    } catch(err){
+      return exits.error(err);
+    }
   }
+}
+function arrayToExample(paramsArray){
+  var exampleObj = {};
+  _.each(paramsArray, function(param){
+    param.replace(" ", ""); //Trim space from param name
+    if(param == "email") {
+      exampleObj.email = "example@email.com"
+    } else {
+      exampleObj[param] = "example data"
+    }
+  });
+  return exampleObj;
 }

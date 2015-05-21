@@ -1,6 +1,6 @@
 {
   "name": "machinepack-jwt",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "Work with JSON Web Tokens.",
   "scripts": {
     "test": "node ./node_modules/test-machinepack-mocha/bin/testmachinepack-mocha.js"
@@ -14,7 +14,8 @@
   "license": "MIT",
   "dependencies": {
     "jsonwebtoken": "^5.0.0",
-    "machine": "^3.0.0"
+    "machine": "^3.0.0",
+    "underscore": "^1.8.3"
   },
   "repository": {
     "type": "git",

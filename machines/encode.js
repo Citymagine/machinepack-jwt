@@ -28,9 +28,14 @@ module.exports = {
       example:'HS256',
       description:'The type of algorithm that is used to encode the JWT. Options: HS256, HS384, HS512 and RS256.'
     },
-    expires:{
-      friendlyName:'Expires',
-      example:43200,
+    expiresInSeconds:{
+      friendlyName:'Expires in Seconds',
+      example: 60,
+      description:'Number of seconds until the token expires.'
+    },
+    expiresInMinutes:{
+      friendlyName:'Expires in Minutes',
+      example: 120,
       description:'Number of minutes until the token expires.'
     }
   },
@@ -60,8 +65,11 @@ module.exports = {
       if(inputs.algorithm){
         options.algorithm = inputs.algorithm;
       }
-      if(inputs.expires){
-        options.expires = inputs.expires;
+      if(inputs.expiresInMinutes){
+        options.expiresInMinutes = inputs.expiresInMinutes;
+      }
+      if(inputs.expiresInSeconds){
+        options.expiresInSeconds = inputs.expiresInSeconds;
       }
       return exits.success(jwt.sign(inputs.payload, inputs.secret, options));
     }
